@@ -1,3 +1,4 @@
+
 const puppeteer = require('puppeteer');
 let cFile = process.argv[2];
 let fs = require("fs");
@@ -46,3 +47,38 @@ let scrap = require("./scrap");
     await page.waitFor(1000);
     console.log("\nTweet posted");
     console.log("`````````````````````````````````````````````````````````");
+
+
+    //***********************************888Tweet posted
+
+    //await page.waitForSelector('.DraftEditor-editorContainer');
+    await page.type('.DraftEditor-editorContainer', "Tweet Successfully posted!" + message, { delay: 100 })
+    await page.waitFor(3000);
+    await page.type('.css-1dbjc4n > .css-1dbjc4n > .css-1dbjc4n > .css-901oao > .r-30o5oe', userSearched, { delay: 100 })
+    await page.waitFor(2500);
+    //await page.keyboard.press("Enter");
+    await page.goto("https://twitter.com/" + userSearched, { waitUntil: "networkidle2" });
+    await page.waitFor(2500);
+    //await page.waitForSelector()
+    await page.screenshot({ path: 'info.png' }, { delay: 120 });
+
+    await page.waitFor(2000);
+
+    await scrap.Scrapper(userSearched);
+
+    console.log("Twitter Account Scrapped")
+    console.log("`````````````````````````````````````````````````````````");
+
+
+    browser.close();
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+})()
+
+
+
+
+
+
